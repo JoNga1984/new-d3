@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="style.css">
+	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<meta charset="utf-8">
+</head>
+
+
+
+<body>
+
+	<h1> Mijn eerste D3 ontwerpen<h1>
+	<h3>Joanne van Hemsbergen - 2050592<h3>
+	
+	
+	<br>
+	
+	<p>SVG figuren met animatie<p>
+	
+	<hr>
+	
+	 <svg id="figuren" width="900" height="250">
+        <rect id="vierkant" x="680" y="50" fill="#FF008D" width="120" height="120"/>
+        <circle id = "rondje" fill="#FF6CBD" cx="410" cy="125" r="60"/>
+        <polygon id="ster" fill="#FFBAE0" points="100,10 40,198 190,78 10,78 160,198"/>
+    </svg>
+	
+<script>
+
+    var rect = d3.select('#figuren rect');
+    var circle = d3.select('#figuren circle');
+    var polygon = d3.select('#figuren polygon');
+
+
+
+var svg = d3.select('#vierkant').on('click', function() {
+					rect.transition()
+					.duration(500) 
+					.delay(100) 
+					.attr("fill","#C785FF")
+					.attr("y", -5)
+					.ease("circle")
+					.each("end",function() {        
+					rect.transition()         
+					.attr("y",70)
+					.duration(400) 
+					.delay(100)  
+					.ease("circle");    
+					})
+					})
+					
+
+var svg = d3.select('#ster').on('click', function() {
+					polygon.transition()
+					.duration(5000) 
+					.delay(500) 
+					.attr("fill","#66073C")
+					.ease("in-out")
+					.each("end",function() { 
+					polygon.transition() 
+					.attr("fill","#FFBAE0")
+					.duration(5000) 
+					.delay(0)  
+					.ease("elastic");  
+					})
+					})
+					
+var svg = d3.select('#rondje').on('click', function() {
+					circle.transition()
+					.duration(500) 
+					.delay(100) 
+					.attr("cx",500)
+					.ease("bounce")
+					.each("end",function() { 
+					circle.transition() 
+					.attr("cx",410)					
+					.duration(10000) 
+					.delay(100)  
+					.ease("bounce");  
+					})
+					})
+
+ 
+
+</script>
+	
+	<br>
+	
+	<p> Een hele simpele barchart<p>
+	
+	<hr>
+	
+	<div class="chart"></div>	
+	<button id="knop">Verjaardagen in oktober</button>
+	<button id="knop1">Verjaardagen in november</button>
+	<button id="knop2">Verjaardagen in december</button>
+	
+	
+	
+
+<script>
+
+
+	var data = [7, 14, 22, 30];
+	var data2 = [9,13,14,27,30];
+	var data3 = [13,19,23,24,25,31];
+	
+
+	var bars = d3.scale.linear()
+    .domain([0, d3.max(data)])
+    .range([0,480]);
+
+	d3.select(".chart")
+	.selectAll("div")
+    .data(data)
+	.enter().append("div")
+    .style("width", function(d) { return bars(d) + "px"; })
+    .text(function(d) { return d});
+
+
+
+	d3.select('#knop').on('click', function() {
+	
+	d3.select('.chart').selectAll('div').data(data).transition().style("width", function(d) { return bars(d) + "px";}).duration(1000).text(function(d) { return d});
+	
+	});
+	d3.select('#knop1').on('click', function() {
+	d3.select('.chart').selectAll('div').data(data2).transition().style("width", function(d) { return bars(d) + "px";}).duration(1000).text(function(d) { return d});
+	});
+	
+	d3.select('#knop2').on('click', function() {
+	d3.select('.chart').selectAll('div').data(data3).transition().style("width", function(d) { return bars(d) + "px";}).duration(1000).text(function(d) { return d});
+	
+	});
+	
+	
+
+	
+
+
+	
+	
+</script>
+
+	<br>
+
+	<p>Pulsing Cirkels<p>
+	
+	<hr>
+
+<script>
+	
+	var canvas = d3.select("body")
+					.append("svg")
+					.attr("width",1600)
+					.attr("height",1000);
+					//het aangeven van waar er op het scherm getekend wordt
+					
+					
+	var cirkel = canvas.append("circle")
+					.attr("cx", 200)
+					.attr("cy", 200)
+					.attr("r", 150)
+					.attr("fill", "black");
+					//tekenen van de eerste cirkel
+		
+	var cirkel2 = canvas.append("circle")
+					.attr("cx", 600)
+					.attr("cy", 200)
+					.attr("r", 150)
+					.attr("fill", "black");
+					//tekenen van de tweede cirkel
+					
+	var cirkel3 = canvas.append("circle")
+					.attr("cx", 1000)
+					.attr("cy", 200)
+					.attr("r", 150)
+					.attr("fill", "black")
+					//tekenen van de derde cirkel
+					
+		function animate() {
+			if (counter % 5 === 0) {
+            cirkel.transition()
+			.duration(500)
+			.attr('fill', 'pink')
+			.attr("r",80);
+            
+			cirkel2.transition()
+			.duration(500)
+			.attr('fill', 'purple')
+			.attr("r",80);
+            
+			cirkel3.transition()
+			.duration(500)
+			.attr('fill', 'pink')
+			.attr("r",80);
+			}else {
+            
+			cirkel.transition()
+			.duration(500)
+			.attr('fill', 'purple')
+			.attr("r",180)
+			.style("opacity",50);
+           
+		   cirkel2.transition()
+			.duration(500)
+			.attr('fill', 'pink')
+			.attr("r",180)
+			.style("opacity",50);
+            
+			cirkel3.transition()
+			.duration(500)
+			.attr('fill', 'purple')
+			.attr("r",180)
+			.style("opacity",50);
+			}
+			//animatie die er voor zorgt dat de cirkels groter en kleiner wordt
+			//animatie die er voor zorgt dat de cirkels elkaar kleuren aan neemt
+			//dit gebeurd gedurende de counter van start gaat en loopt
+			
+
+			counter++;
+			setTimeout(animate, 500);
+    }
+	var counter = 1;
+	animate();
+ </script>
+ 
+	<br>
+
+	</body>
+</html>

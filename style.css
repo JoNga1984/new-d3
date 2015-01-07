@@ -1,0 +1,38 @@
+.chart div {
+  font: 30px 'Lobster', cursive;
+  background-color: pink;
+  text-align: right;
+  padding:25px;
+  margin: 10px;
+  color: purple;
+}
+.bars:hover {
+  fill: purple;
+ }
+  
+html {
+    min-width: 1040px;
+}
+
+body {
+    font-family: 'Lobster', cursive; 
+    margin: 1em auto 1em auto;
+    position: relative;
+    width: 960px;
+}
+
+h1 {
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+}
+
+
+
+p {
+	font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -2px;
+    margin: .3em 0 .1em 0;
+	}
